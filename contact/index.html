@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>문의 — 나른</title>
+<meta name="description" content="제안, 오류 신고, 제휴 문의">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#FBF7F5;--ink-2:#F4ECE9;--line:#EADFDA;--gray:#A2918D;--gray-2:#6E5F5C;
+  --deep:#42383A;--acc:#CE9A94;--born:#A99BC1;
+  --serif:'Gowun Batang',serif;--sans:'Pretendard','Pretendard Variable',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--ink);color:var(--deep);font-family:var(--sans);font-size:16px;line-height:1.72;
+  letter-spacing:-.011em;min-height:100svh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(90% 55% at 12% -5%,rgba(169,155,193,.14),transparent 62%),
+             radial-gradient(85% 50% at 92% 8%,rgba(206,154,148,.13),transparent 60%)}
+.wrap{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 22px 90px}
+header{padding:clamp(56px,12vh,96px) 0 8px}
+.brand{font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--gray)}
+h1{font-family:var(--serif);font-size:clamp(27px,6.8vw,38px);line-height:1.46;letter-spacing:-.03em;
+  font-weight:700;margin:16px 0 18px}
+.lead{font-family:var(--serif);font-size:16px;line-height:1.95;color:var(--gray-2);letter-spacing:-.015em}
+.divide{display:flex;align-items:center;gap:12px;margin:52px 0 20px}
+.divide::before,.divide::after{content:'';flex:1;height:1px;background:var(--line)}
+.divide span{font-size:11.5px;font-weight:600;letter-spacing:.16em;color:var(--gray);white-space:nowrap}
+a.card{display:block;border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  padding:22px 20px;margin-bottom:11px;text-decoration:none;color:inherit;position:relative;
+  overflow:hidden;transition:transform .18s,border-color .18s}
+a.card:hover{transform:translateY(-2px);border-color:var(--acc)}
+a.card::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--born),var(--acc))}
+.card h2{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.03em;line-height:1.5;margin-bottom:8px}
+.card p{font-family:var(--serif);font-size:14.5px;line-height:1.88;color:var(--gray-2);letter-spacing:-.015em}
+.card .meta{font-size:11.5px;color:var(--gray);margin-top:10px;letter-spacing:.02em}
+.soon{opacity:.5;pointer-events:none}
+ul.posts{list-style:none}
+ul.posts li{border-top:1px solid var(--line)}
+ul.posts li:last-child{border-bottom:1px solid var(--line)}
+ul.posts a{display:block;padding:17px 2px;text-decoration:none;color:inherit;transition:padding-left .18s}
+ul.posts a:hover{padding-left:8px}
+ul.posts .t{font-family:var(--serif);font-size:16.5px;font-weight:700;letter-spacing:-.025em;line-height:1.5}
+ul.posts .d{font-size:13px;color:var(--gray);margin-top:4px;line-height:1.6}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--gray);line-height:1.9}
+footer a{color:var(--gray-2);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--acc)}
+.fnav{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.back{display:inline-block;margin:36px 0 0;font-size:13px;color:var(--gray);text-decoration:none}
+.back:hover{color:var(--acc)}
+article{padding:14px 0 0}
+article h1{margin:14px 0 10px}
+article .sub{font-size:14px;color:var(--gray);margin-bottom:34px;letter-spacing:-.015em}
+article h2{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.03em;
+  margin:40px 0 14px;line-height:1.5}
+article p{font-family:var(--serif);font-size:16.5px;line-height:2.0;color:var(--gray-2);
+  letter-spacing:-.015em;margin-bottom:19px}
+article p b{color:var(--deep);font-weight:700}
+article ul{margin:0 0 19px 18px}
+article li{font-family:var(--serif);font-size:16px;line-height:1.95;color:var(--gray-2);margin-bottom:7px}
+.cta{display:block;border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  padding:20px;margin:38px 0 0;text-decoration:none;color:inherit;text-align:center}
+.cta:hover{border-color:var(--acc)}
+.cta strong{font-family:var(--serif);font-size:17px;display:block;margin-bottom:5px}
+.cta span{font-size:13.5px;color:var(--gray)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="/">← 돌아가기</a>
+<article>
+<h1>문의</h1>
+<p class="sub">제안, 오류 신고, 그 밖의 이야기</p>
+
+<p>테스트 결과가 이상하거나, 계산이 틀린 것 같거나, 읽다가 걸리는 문장을 발견하셨다면 알려 주세요. 특히 사주와 별자리 계산은 절기 경계나 태어난 시각 처리에서 오차가 생길 수 있어, 제보가 큰 도움이 됩니다.</p>
+
+<p>만들었으면 하는 테스트나 다뤘으면 하는 주제가 있다면 그것도 환영합니다.</p>
+
+<h2>연락처</h2>
+<p><b>nareun.contact@gmail.com</b></p>
+<p>혼자 만들고 있어 답장이 조금 늦을 수 있습니다. 그래도 모두 읽고 있습니다.</p>
+
+<h2>운영자</h2>
+<p>낮에는 다른 일을 하고, 퇴근하고 조금씩 만듭니다. 만드는 게 재밌어서 하는 일이라 속도가 빠르지는 않습니다.</p>
+
+</article>
+<footer>
+  <div class="fnav">
+    <a href="/about/">소개</a>
+    <a href="/privacy/">개인정보처리방침</a>
+    <a href="/contact/">문의</a>
+  </div>
+  © 2026 나른. 이곳의 모든 해석은 재미를 위한 것이며, 사람을 정확히 재는 도구가 아닙니다.
+</footer>
+</div>
+</body>
+</html>

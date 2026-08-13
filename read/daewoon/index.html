@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>10년마다 사람이 바뀐다는 말에 대하여 — 나른</title>
+<meta name="description" content="사주의 대운은 무엇이고 왜 하필 10년인가">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#FBF7F5;--ink-2:#F4ECE9;--line:#EADFDA;--gray:#A2918D;--gray-2:#6E5F5C;
+  --deep:#42383A;--acc:#CE9A94;--born:#A99BC1;
+  --serif:'Gowun Batang',serif;--sans:'Pretendard','Pretendard Variable',-apple-system,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--ink);color:var(--deep);font-family:var(--sans);font-size:16px;line-height:1.72;
+  letter-spacing:-.011em;min-height:100svh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(90% 55% at 12% -5%,rgba(169,155,193,.14),transparent 62%),
+             radial-gradient(85% 50% at 92% 8%,rgba(206,154,148,.13),transparent 60%)}
+.wrap{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:0 22px 90px}
+header{padding:clamp(56px,12vh,96px) 0 8px}
+.brand{font-size:12px;font-weight:600;letter-spacing:.2em;color:var(--gray)}
+h1{font-family:var(--serif);font-size:clamp(27px,6.8vw,38px);line-height:1.46;letter-spacing:-.03em;
+  font-weight:700;margin:16px 0 18px}
+.lead{font-family:var(--serif);font-size:16px;line-height:1.95;color:var(--gray-2);letter-spacing:-.015em}
+.divide{display:flex;align-items:center;gap:12px;margin:52px 0 20px}
+.divide::before,.divide::after{content:'';flex:1;height:1px;background:var(--line)}
+.divide span{font-size:11.5px;font-weight:600;letter-spacing:.16em;color:var(--gray);white-space:nowrap}
+a.card{display:block;border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  padding:22px 20px;margin-bottom:11px;text-decoration:none;color:inherit;position:relative;
+  overflow:hidden;transition:transform .18s,border-color .18s}
+a.card:hover{transform:translateY(-2px);border-color:var(--acc)}
+a.card::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--born),var(--acc))}
+.card h2{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.03em;line-height:1.5;margin-bottom:8px}
+.card p{font-family:var(--serif);font-size:14.5px;line-height:1.88;color:var(--gray-2);letter-spacing:-.015em}
+.card .meta{font-size:11.5px;color:var(--gray);margin-top:10px;letter-spacing:.02em}
+.soon{opacity:.5;pointer-events:none}
+ul.posts{list-style:none}
+ul.posts li{border-top:1px solid var(--line)}
+ul.posts li:last-child{border-bottom:1px solid var(--line)}
+ul.posts a{display:block;padding:17px 2px;text-decoration:none;color:inherit;transition:padding-left .18s}
+ul.posts a:hover{padding-left:8px}
+ul.posts .t{font-family:var(--serif);font-size:16.5px;font-weight:700;letter-spacing:-.025em;line-height:1.5}
+ul.posts .d{font-size:13px;color:var(--gray);margin-top:4px;line-height:1.6}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--gray);line-height:1.9}
+footer a{color:var(--gray-2);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--acc)}
+.fnav{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+.back{display:inline-block;margin:36px 0 0;font-size:13px;color:var(--gray);text-decoration:none}
+.back:hover{color:var(--acc)}
+article{padding:14px 0 0}
+article h1{margin:14px 0 10px}
+article .sub{font-size:14px;color:var(--gray);margin-bottom:34px;letter-spacing:-.015em}
+article h2{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.03em;
+  margin:40px 0 14px;line-height:1.5}
+article p{font-family:var(--serif);font-size:16.5px;line-height:2.0;color:var(--gray-2);
+  letter-spacing:-.015em;margin-bottom:19px}
+article p b{color:var(--deep);font-weight:700}
+article ul{margin:0 0 19px 18px}
+article li{font-family:var(--serif);font-size:16px;line-height:1.95;color:var(--gray-2);margin-bottom:7px}
+.cta{display:block;border:1px solid var(--line);border-radius:16px;background:var(--ink-2);
+  padding:20px;margin:38px 0 0;text-decoration:none;color:inherit;text-align:center}
+.cta:hover{border-color:var(--acc)}
+.cta strong{font-family:var(--serif);font-size:17px;display:block;margin-bottom:5px}
+.cta span{font-size:13.5px;color:var(--gray)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="/">← 돌아가기</a>
+<article>
+<h1>10년마다 사람이<br>바뀐다는 말에 대하여</h1>
+<p class="sub">사주의 대운은 무엇이고, 왜 하필 10년인가</p>
+
+<p>돌아보면 인생에 마디가 있습니다. 스물여덟 즈음, 서른다섯 즈음. 그 무렵을 지나면서 사는 곳이 바뀌었거나, 일이 바뀌었거나, 곁에 있던 사람이 바뀌었습니다. 그리고 그 전과 후의 나는 조금 다른 사람 같습니다.</p>
+
+<p>사주에는 이 마디를 다루는 개념이 있습니다. <b>대운</b>이라고 부릅니다.</p>
+
+<h2>사주는 태어난 순간의 사진이다</h2>
+
+<p>사주팔자는 태어난 해·달·날·시를 각각 두 글자로 바꾼 여덟 글자입니다. 이건 태어난 그 순간에 고정됩니다. 평생 바뀌지 않습니다.</p>
+
+<p>그런데 사람은 평생 같지 않습니다. 그래서 명리학은 고정된 사진 위에 <b>움직이는 축</b>을 하나 더 놓았습니다. 그게 대운입니다. 사주가 사진이라면 대운은 그 사진에 비치는 조명이 10년마다 바뀌는 것에 가깝습니다.</p>
+
+<h2>왜 10년인가</h2>
+
+<p>절기 때문입니다. 사주에서 달을 나누는 기준은 달력의 1일이 아니라 <b>절기</b>입니다. 입춘, 경칩, 청명 같은 것들이요. 절기는 태양의 위치로 정해지고, 한 절기에서 다음 절기까지가 대략 30일입니다.</p>
+
+<p>명리학은 여기서 <b>하루를 4개월로 환산</b>합니다. 그러면 30일이 10년이 됩니다. 대운이 10년 단위인 건 이 환산에서 나옵니다.</p>
+
+<p>그리고 첫 대운이 시작되는 나이도 같은 방식으로 계산합니다. 태어난 날부터 절기 경계까지의 날 수를 3으로 나눈 값이 대운수가 됩니다. 예를 들어 그 거리가 열여덟 날이면 여섯 살부터 첫 대운이 시작되고, 그 뒤로 열여섯 살, 스물여섯 살에 다음 마디가 옵니다.</p>
+
+<p>재미있는 건 방향입니다. 태어난 해가 양의 해인지 음의 해인지, 그리고 남자인지 여자인지에 따라 절기를 앞으로 세기도 하고 뒤로 세기도 합니다. 같은 날 태어난 남자와 여자의 대운이 정반대로 흐르는 경우가 그래서 생깁니다.</p>
+
+<h2>그래서 뭘 믿어야 하나</h2>
+
+<p>대운이 실제로 인생을 바꾼다는 증거는 없습니다. 스물여덟에 이직한 건 대운 때문이 아니라 그맘때가 이직하기 좋은 시기여서일 가능성이 훨씬 높습니다.</p>
+
+<p>다만 이런 계산이 오래 쓰인 데는 이유가 있습니다. <b>사람에게는 자기 인생을 마디로 나누고 싶은 욕구가 있습니다.</b> 연속된 시간은 견디기 어렵지만, 챕터가 나뉜 이야기는 견딜 만합니다. 지금이 힘들어도 "이 대운이 지나면"이라고 생각할 수 있으면 조금 낫습니다.</p>
+
+<p>그러니 대운을 예언으로 읽지 말고 <b>이야기의 목차</b>로 읽는 편이 좋겠습니다. 목차가 틀렸다고 책이 나쁜 건 아니니까요.</p>
+
+<a class="cta" href="/gap/">
+  <strong>타고난 나와 지금의 나, 얼마나 멀어졌을까</strong>
+  <span>생년월일시로 3분 만에 확인해 보세요 →</span>
+</a>
+</article>
+<footer>
+  <div class="fnav">
+    <a href="/about/">소개</a>
+    <a href="/privacy/">개인정보처리방침</a>
+    <a href="/contact/">문의</a>
+  </div>
+  © 2026 나른. 이곳의 모든 해석은 재미를 위한 것이며, 사람을 정확히 재는 도구가 아닙니다.
+</footer>
+</div>
+</body>
+</html>

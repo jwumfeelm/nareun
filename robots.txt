@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nareun.com/sitemap.xml
