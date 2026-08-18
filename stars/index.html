@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>별 모으기 — 나른</title>
+<meta name="description" content="켜두면 밤새 별빛이 모입니다. 그 빛으로 별을 하나씩 켜서 열두 별자리를 완성하는 조용한 방치형.">
+<meta property="og:title" content="별 모으기">
+<meta property="og:description" content="켜두면 밤새 별빛이 모입니다. 소리 나지 않는 방치형.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<script src="/analytics.js"></script>
+<style>
+:root{
+  --sky:#191A2B;        /* 밤하늘 */
+  --sky-2:#212440;      /* 카드 */
+  --line:#2E3252;
+  --dim:#7A7FA6;
+  --soft:#A9AECC;
+  --text:#EDEBF5;
+  --star:#F2E9C8;       /* 켜진 별 */
+  --lav:#A99BC1;        /* 라벤더 */
+  --rose:#CE9A94;       /* 로즈 */
+  --serif:'Gowun Batang',serif;
+  --sans:'Pretendard','Pretendard Variable',-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--sky);color:var(--text);font-family:var(--sans);font-size:16px;
+  line-height:1.72;letter-spacing:-.011em;min-height:100svh;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(85% 50% at 18% 0%,rgba(169,155,193,.16),transparent 60%),
+             radial-gradient(80% 45% at 88% 6%,rgba(206,154,148,.11),transparent 58%)}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 20px 80px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lav);outline-offset:3px}
+
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0 6px}
+.home{font-size:13px;color:var(--dim);text-decoration:none}
+.home:hover{color:var(--text)}
+.brand{font-family:var(--serif);font-size:15px;letter-spacing:.06em;color:var(--soft)}
+
+h1{font-family:var(--serif);font-size:27px;font-weight:700;letter-spacing:-.03em;
+  line-height:1.5;margin:22px 0 10px}
+.sub{font-family:var(--serif);font-size:15px;color:var(--soft);line-height:1.9;letter-spacing:-.015em}
+
+/* 별빛 카운터 */
+.meter{display:flex;align-items:baseline;justify-content:space-between;
+  margin:22px 0 14px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--sky-2)}
+.dust{font-size:30px;font-weight:200;letter-spacing:-.04em;color:var(--star);
+  font-variant-numeric:tabular-nums}
+.dust em{font-style:normal;font-size:13px;color:var(--dim);margin-left:5px;font-weight:400}
+.rate{font-size:12.5px;color:var(--dim);text-align:right;line-height:1.5}
+.rate b{color:var(--soft);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* 하늘 */
+.sky{position:relative;border:1px solid var(--line);border-radius:16px;background:
+  radial-gradient(120% 90% at 50% 110%,rgba(169,155,193,.10),transparent 60%),#141527;
+  overflow:hidden}
+.sky svg{display:block;width:100%;height:auto}
+.cname{position:absolute;left:16px;top:14px;font-family:var(--serif);font-size:15px;color:var(--soft)}
+.cname span{font-size:11px;color:var(--dim);margin-left:6px}
+.cprog{position:absolute;right:16px;top:16px;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.twinkle{animation:tw 3.6s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.85}50%{opacity:1}}
+
+/* 버튼 */
+.act{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+button{font-family:var(--sans);cursor:pointer;border-radius:12px;transition:.16s;border:1px solid var(--line)}
+button:disabled{opacity:.42;cursor:default}
+.big{padding:16px;background:linear-gradient(135deg,var(--lav),var(--rose));border:0;color:#20213A;
+  font-size:15.5px;font-weight:700;letter-spacing:-.02em}
+.big:hover:not(:disabled){filter:brightness(1.08)}
+.big:disabled{background:var(--sky-2);color:var(--dim)}
+.gaze{padding:16px;background:var(--sky-2);color:var(--soft);font-size:15px;font-weight:600}
+.gaze:hover{border-color:var(--lav);color:var(--text)}
+.cost{display:block;font-size:11.5px;font-weight:500;opacity:.8;margin-top:3px;font-variant-numeric:tabular-nums}
+
+/* 업그레이드 */
+.sec{margin-top:34px}
+.sec h2{font-size:11.5px;font-weight:600;letter-spacing:.16em;color:var(--dim);margin-bottom:12px}
+.up{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  padding:15px 16px;background:var(--sky-2);margin-bottom:8px;color:inherit}
+.up:hover:not(:disabled){border-color:var(--lav)}
+.up .info{flex:1;min-width:0}
+.up .n{font-family:var(--serif);font-size:15.5px;font-weight:700;letter-spacing:-.025em}
+.up .n i{font-style:normal;font-size:11.5px;color:var(--dim);margin-left:6px;font-family:var(--sans)}
+.up .d{font-size:12.5px;color:var(--dim);line-height:1.55;margin-top:2px}
+.up .p{font-size:13px;color:var(--star);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+
+/* 완성 목록 */
+.done{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:12.5px;padding:6px 11px;border:1px solid var(--line);border-radius:20px;color:var(--dim)}
+.chip.on{color:var(--star);border-color:rgba(242,233,200,.4);background:rgba(242,233,200,.07)}
+
+/* 알림 */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:50;
+  max-width:min(560px,calc(100% - 32px));padding:16px 20px;border:1px solid rgba(242,233,200,.35);
+  border-radius:14px;background:#22243C;opacity:0;pointer-events:none;transition:.4s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast .t{font-family:var(--serif);font-size:15.5px;font-weight:700;color:var(--star);margin-bottom:5px}
+.toast .m{font-family:var(--serif);font-size:14px;color:var(--soft);line-height:1.75;letter-spacing:-.015em}
+
+.foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:12px;color:#5D6288;line-height:1.85}
+.foot a{color:var(--dim)}
+.reset{background:none;border:0;color:#5D6288;font-size:12px;text-decoration:underline;padding:0;cursor:pointer}
+
+@media (min-width:768px){
+  .wrap{max-width:680px}
+  body{font-size:17px}
+  h1{font-size:30px}
+  .sub{font-size:16px}
+  .up .n{font-size:16.5px}
+  .up .d{font-size:13.5px}
+  .toast .m{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <a class="home" href="/">← 나른</a>
+    <div class="brand">별 모으기</div>
+  </div>
+
+  <h1 id="head">첫 번째 별을 켜보세요</h1>
+  <p class="sub" id="lead">
+    창을 닫아두어도 별빛은 모입니다. 다만 하늘을 보고 있을 때 조금 더 빨리 모입니다.
+  </p>
+
+  <div class="meter">
+    <div><span class="dust" id="dust">0</span><em>별빛</em></div>
+    <div class="rate">초당 <b id="rate">0.6</b><br><span id="lit">0 / 78 개의 별</span></div>
+  </div>
+
+  <div class="sky">
+    <div class="cname" id="cname">양자리 <span>白羊</span></div>
+    <div class="cprog" id="cprog">0 / 5</div>
+    <svg id="svg" viewBox="0 0 100 88" aria-label="별자리"></svg>
+  </div>
+
+  <div class="act">
+    <button class="big" id="buy" onclick="lightStar()">별 하나 켜기<span class="cost" id="buycost">9 별빛</span></button>
+    <button class="gaze" onclick="gaze()">올려다보기<span class="cost" id="gazeamt">+1</span></button>
+  </div>
+
+  <div class="sec">
+    <h2>하늘 다듬기</h2>
+    <div id="ups"></div>
+  </div>
+
+  <div class="sec">
+    <h2>완성한 별자리</h2>
+    <div class="done" id="done"></div>
+  </div>
+
+  <div class="foot">
+    진행 상황은 이 브라우저에만 저장됩니다. 서버로 전송되지 않고, 방문 기기가 바뀌면 처음부터 시작합니다.<br>
+    <a href="/">나른</a> · <a href="/gap/">타고난 나와 지금의 나</a> ·
+    <button class="reset" onclick="resetAll()">처음부터 다시</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="t" id="toastT"></div><div class="m" id="toastM"></div></div>
+
+<script src="data.js"></script>
+<script>
+/* ══════════ 밸런스 ══════════ */
+const BASE_RATE=0.6, STAR_BASE=9, STAR_MUL=1.21, UP_MUL=1.38,
+      CONST_BONUS=1.12, OFFLINE_EFF=0.5, OFFLINE_CAP=8*3600, GAZE_DIV=4;
+const KEY='nareun.stars.v1';
+const TOTAL=CONSTELLATIONS.reduce((a,c)=>a+c.stars.length,0);
+
+let S={dust:0, lit:0, up:[0,0,0], seen:0, t:Date.now()};
+
+/* ══════════ 저장 ══════════ */
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(!raw) return false;
+    const d=JSON.parse(raw);
+    if(typeof d.lit!=='number') return false;
+    S={dust:+d.dust||0, lit:Math.min(TOTAL,+d.lit||0), up:d.up||[0,0,0],
+       seen:+d.seen||0, t:+d.t||Date.now()};
+    return true;
+  }catch(e){ return false; }
+}
+function save(){
+  try{ S.t=Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+}
+
+/* ══════════ 계산 ══════════ */
+const starCost = () => Math.floor(STAR_BASE*Math.pow(STAR_MUL,S.lit));
+const upCost   = i => Math.floor(UPGRADES[i].base*Math.pow(UP_MUL,S.up[i]));
+function rate(){
+  let r=BASE_RATE;
+  UPGRADES.forEach((u,i)=> r+=u.add*S.up[i]);
+  return r*Math.pow(CONST_BONUS, doneCount());
+}
+function doneCount(){
+  let n=0,acc=0;
+  for(const c of CONSTELLATIONS){ acc+=c.stars.length; if(S.lit>=acc) n++; }
+  return n;
+}
+function current(){
+  let acc=0;
+  for(let i=0;i<CONSTELLATIONS.length;i++){
+    const c=CONSTELLATIONS[i];
+    if(S.lit < acc+c.stars.length) return {i, c, on:S.lit-acc};
+    acc+=c.stars.length;
+  }
+  const last=CONSTELLATIONS.length-1;
+  return {i:last, c:CONSTELLATIONS[last], on:CONSTELLATIONS[last].stars.length};
+}
+function fmt(n){
+  n=Math.floor(n);
+  if(n<10000)  return n.toLocaleString();
+  if(n<1e8)    return (n/1e4).toFixed(n<1e6?1:0).replace(/\.0$/,'')+'만';
+  if(n<1e12)   return (n/1e8).toFixed(n<1e10?1:0).replace(/\.0$/,'')+'억';
+  return (n/1e12).toFixed(1).replace(/\.0$/,'')+'조';
+}
+
+/* ══════════ 동작 ══════════ */
+function gaze(){
+  S.dust += Math.max(1, rate()/GAZE_DIV);
+  render();
+}
+function lightStar(){
+  const c=starCost();
+  if(S.dust<c) return;
+  S.dust-=c; S.lit++;
+  const before=doneCount();
+  save();
+  if(S.lit===1) track('stars_first');
+  // 별자리 완성 확인
+  let acc=0;
+  for(let i=0;i<CONSTELLATIONS.length;i++){
+    acc+=CONSTELLATIONS[i].stars.length;
+    if(S.lit===acc){
+      toast(CONSTELLATIONS[i].name+' 완성', CONSTELLATIONS[i].line);
+      track('stars_constellation',{index:i+1,name:CONSTELLATIONS[i].name});
+      break;
+    }
+  }
+  if(S.lit===TOTAL){
+    toast('열두 별자리가 모두 켜졌습니다',
+      '이제 하늘에 빈 자리가 없습니다. 여기까지 오는 데 며칠이 걸렸는지, 그동안 무슨 일이 있었는지는 당신만 알겠지요.');
+    track('stars_complete');
+  }
+  render();
+}
+function buyUp(i){
+  const c=upCost(i);
+  if(S.dust<c) return;
+  S.dust-=c; S.up[i]++; save();
+  track('stars_upgrade',{id:UPGRADES[i].id, level:S.up[i]});
+  render();
+}
+function resetAll(){
+  if(!confirm('지금까지 켠 별이 모두 사라집니다. 계속할까요?')) return;
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  S={dust:0,lit:0,up:[0,0,0],seen:0,t:Date.now()};
+  render();
+}
+
+let toastTimer=null;
+function toast(t,m){
+  const el=document.getElementById('toast');
+  document.getElementById('toastT').textContent=t;
+  document.getElementById('toastM').textContent=m;
+  el.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove('on'), 7000);
+}
+
+/* ══════════ 그리기 ══════════ */
+function drawSky(){
+  const {c,on}=current();
+  let s='';
+  // 배경 잔별
+  for(let i=0;i<26;i++){
+    const x=(i*37.7)%100, y=((i*61.3)%80)+4, r=(i%5===0)?.55:.35;
+    s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="#6E74A0" opacity=".5"/>`;
+  }
+  // 연결선 — 양 끝이 모두 켜졌을 때만
+  c.lines.forEach(([a,b])=>{
+    if(a<on && b<on){
+      const p=c.stars[a], q=c.stars[b];
+      s+=`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"
+           stroke="#F2E9C8" stroke-width=".5" opacity=".38"/>`;
+    }
+  });
+  // 별
+  c.stars.forEach((p,i)=>{
+    if(i<on){
+      s+=`<circle class="twinkle" cx="${p[0]}" cy="${p[1]}" r="3.4" fill="#F2E9C8" opacity=".14"/>`;
+      s+=`<circle class="twinkle" cx="${p[0]}" cy="${p[1]}" r="1.5" fill="#F2E9C8"/>`;
+    }else{
+      s+=`<circle cx="${p[0]}" cy="${p[1]}" r="1.1" fill="none" stroke="#4A4F78" stroke-width=".5"/>`;
+    }
+  });
+  document.getElementById('svg').innerHTML=s;
+  document.getElementById('cname').innerHTML=`${c.name} <span>${c.hanja}</span>`;
+  document.getElementById('cprog').textContent=`${on} / ${c.stars.length}`;
+}
+
+function render(){
+  const r=rate(), sc=starCost();
+  document.getElementById('dust').textContent=fmt(S.dust);
+  document.getElementById('rate').textContent=r<10?r.toFixed(1):fmt(r);
+  document.getElementById('lit').textContent=`${S.lit} / ${TOTAL} 개의 별`;
+  document.getElementById('buycost').textContent=fmt(sc)+' 별빛';
+  document.getElementById('buy').disabled = S.dust<sc || S.lit>=TOTAL;
+  document.getElementById('gazeamt').textContent='+'+fmt(Math.max(1,r/GAZE_DIV));
+  if(S.lit>=TOTAL){
+    document.getElementById('buy').innerHTML='모두 켜졌습니다<span class="cost">78 / 78</span>';
+  }
+
+  document.getElementById('ups').innerHTML=UPGRADES.map((u,i)=>{
+    const c=upCost(i);
+    return `<button class="up" onclick="buyUp(${i})" ${S.dust<c?'disabled':''}>
+      <div class="info"><div class="n">${u.name}${S.up[i]?`<i>Lv.${S.up[i]}</i>`:''}</div>
+      <div class="d">${u.desc} 초당 +${u.add}</div></div>
+      <div class="p">${fmt(c)}</div></button>`;
+  }).join('');
+
+  const dn=doneCount();
+  document.getElementById('done').innerHTML=CONSTELLATIONS.map((c,i)=>
+    `<span class="chip ${i<dn?'on':''}">${i<dn?c.name:'· · ·'}</span>`).join('');
+
+  const head=document.getElementById('head');
+  if(S.lit===0) head.textContent='첫 번째 별을 켜보세요';
+  else if(dn===0) head.textContent='양자리를 채우는 중입니다';
+  else if(dn<12) head.textContent=`별자리 ${dn}개를 켰습니다`;
+  else head.textContent='하늘이 가득 찼습니다';
+
+  drawSky();
+}
+
+/* ══════════ 루프 ══════════ */
+let last=Date.now();
+function tick(){
+  const now=Date.now();
+  const dt=Math.min(5,(now-last)/1000);   // 탭 전환 시 폭주 방지
+  last=now;
+  S.dust += rate()*dt;
+  render();
+}
+setInterval(tick, 250);
+setInterval(save, 5000);
+window.addEventListener('beforeunload', save);
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) save(); else last=Date.now(); });
+
+/* ══════════ 시작 ══════════ */
+(function init(){
+  const had=load();
+  if(had){
+    const away=Math.max(0,(Date.now()-S.t)/1000);
+    const gained=rate()*Math.min(away,OFFLINE_CAP)*OFFLINE_EFF;
+    S.dust+=gained;
+    if(away>600 && gained>=1){
+      const h=Math.floor(away/3600), m=Math.floor(away%3600/60);
+      toast('그동안 모인 별빛',
+        `${h?h+'시간 ':''}${m}분 자리를 비운 사이에 별빛 ${fmt(gained)}이 모였습니다. 오래 두면 더 모이지만, 하늘이 담아둘 수 있는 양에는 한계가 있습니다.`);
+    }
+    track('stars_return',{lit:S.lit, away_min:Math.round(away/60)});
+  }else{
+    track('stars_new');
+  }
+  save();
+  render();
+})();
+</script>
+</body>
+</html>
