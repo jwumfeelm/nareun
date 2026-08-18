@@ -241,7 +241,39 @@ select{background-image:linear-gradient(45deg,transparent 50%,var(--gray) 50%),l
   color:var(--gray-2);line-height:1.7;letter-spacing:-.02em;text-align:center}
 .rare b{color:#B27C74;font-weight:700}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+
+/* ── 데스크톱: 저밀도 화면에서 세리프가 뭉개지지 않도록 본문 상향 ── */
+@media (min-width:768px){
+  .wrap{max-width:700px}
+  body{font-size:17px}
+  .lead{font-size:17.5px;line-height:2.0}
+  .tsub{font-size:17.5px}
+  .tbody p{font-size:18px;line-height:2.05}
+  article p{font-size:18px;line-height:2.05}
+  article li{font-size:17.5px}
+  article h2{font-size:22px}
+  .wcard p{font-size:16.5px;line-height:1.98}
+  .wtitle{font-size:21.5px}
+  .sc-p{font-size:16.5px;line-height:1.94}
+  .sc-t{font-size:18px}
+  .card p{font-size:16px;line-height:1.94}
+  .card h2{font-size:21px}
+  ul.posts .t{font-size:17.5px}
+  ul.posts .d{font-size:14px}
+  .irony>p:first-child{font-size:18.5px}
+  .gline{font-size:15.5px}
+  .tnote{font-size:15px}
+  .qtext{font-size:22px}
+  .opt{font-size:16px}
+  .jv{font-size:15px}
+  .note{font-size:13.5px}
+  .foot{font-size:13px}
+  .rare{font-size:14.5px}
+}
 </style>
+<script src="/analytics.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -421,6 +453,7 @@ function setSex(el){
 }
 
 function go(id){
+  if(id==='birth') track('test_start');
   document.querySelectorAll('.screen').forEach(e=>e.classList.remove('on'));
   document.getElementById('s-'+id).classList.add('on');
   window.scrollTo({top:0,behavior:'instant'});
@@ -480,6 +513,7 @@ function renderQ(){
 }
 function pick(i){
   S.ans[S.qi]=i;
+  track('quiz_step', {step: S.qi+1});
   if(S.qi<10){ S.qi++; renderQ(); window.scrollTo({top:0,behavior:'instant'}); }
   else finish();
 }
@@ -517,6 +551,7 @@ function finish(){
     spread.push(Math.max(...vs)-Math.min(...vs));
   }
   const dist=Math.min(100,Math.round(gap.reduce((a,c)=>a+c,0)/5*1.15));
+  const T0=pickType(pre,post,gap,dist);
 
   // 축마다 체계별 판정 강도가 달라(MBTI는 자기·관계 축에서만 약하게 발언)
   // 원점수로 비교하면 특정 축만 계속 뽑힌다. 축별 평균 spread로 정규화한다.
@@ -537,6 +572,7 @@ function finish(){
   const far=[cv[cv.length-1], cv[0]];
   const uniMean=active.map(s=>V[s.key][uni]).reduce((a,c)=>a+c,0)/active.length;
 
+  track('test_complete', {gap_score: dist, type_name: T0.n, has_mbti: !!S.mbti});
   document.getElementById('result').innerHTML=
     resultHTML(R,V,active,pre,post,gap,spread,dist,uni,con,far,uniMean);
   go('result');
@@ -906,10 +942,21 @@ function resultHTML(R,V,active,pre,post,gap,spread,dist,uni,con,far,uniMean){
 }
 
 function share(d){
+  track('share_click', {gap_score: d});
   const n=document.querySelector('.tname')?.textContent||'';
   const t=`the gap — 나는 「${n}」\n타고난 나와 지금의 나, ${d}%만큼 떨어져 걷고 있대요.\n${location.href.split('#')[0]}`;
   if(navigator.share){ navigator.share({text:t}).catch(()=>{}); return; }
-  navigator.clipboard.writeText(t).then(()=>alert('결과를 복사했습니다.')).catch(()=>alert(t));
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(()=>alert('결과를 복사했습니다.')).catch(()=>fallback(t));
+  } else { fallback(t); }
+  function fallback(txt){
+    try{
+      const a=document.createElement('textarea');
+      a.value=txt; a.style.position='fixed'; a.style.opacity='0';
+      document.body.appendChild(a); a.select(); document.execCommand('copy');
+      document.body.removeChild(a); alert('결과를 복사했습니다.');
+    }catch(e){ alert(txt); }
+  }
 }
 
 </script>

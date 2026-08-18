@@ -50,6 +50,37 @@ footer a:hover{color:var(--acc)}
 .fnav{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+
+/* ── 데스크톱: 저밀도 화면에서 세리프가 뭉개지지 않도록 본문 상향 ── */
+@media (min-width:768px){
+  .wrap{max-width:700px}
+  body{font-size:17px}
+  .lead{font-size:17.5px;line-height:2.0}
+  .tsub{font-size:17.5px}
+  .tbody p{font-size:18px;line-height:2.05}
+  article p{font-size:18px;line-height:2.05}
+  article li{font-size:17.5px}
+  article h2{font-size:22px}
+  .wcard p{font-size:16.5px;line-height:1.98}
+  .wtitle{font-size:21.5px}
+  .sc-p{font-size:16.5px;line-height:1.94}
+  .sc-t{font-size:18px}
+  .card p{font-size:16px;line-height:1.94}
+  .card h2{font-size:21px}
+  ul.posts .t{font-size:17.5px}
+  ul.posts .d{font-size:14px}
+  .irony>p:first-child{font-size:18.5px}
+  .gline{font-size:15.5px}
+  .tnote{font-size:15px}
+  .qtext{font-size:22px}
+  .opt{font-size:16px}
+  .jv{font-size:15px}
+  .note{font-size:13.5px}
+  .foot{font-size:13px}
+  .rare{font-size:14.5px}
+}
 </style>
 <style>
 .back{display:inline-block;margin:36px 0 0;font-size:13px;color:var(--gray);text-decoration:none}
@@ -70,6 +101,7 @@ article li{font-family:var(--serif);font-size:16px;line-height:1.95;color:var(--
 .cta strong{font-family:var(--serif);font-size:17px;display:block;margin-bottom:5px}
 .cta span{font-size:13.5px;color:var(--gray)}
 </style>
+<script src="/analytics.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -83,7 +115,7 @@ article li{font-family:var(--serif);font-size:16px;line-height:1.95;color:var(--
 <p>만들었으면 하는 테스트나 다뤘으면 하는 주제가 있다면 그것도 환영합니다.</p>
 
 <h2>연락처</h2>
-<p><b>nareun.contact@gmail.com</b></p>
+<p><b>YOUR_EMAIL</b></p>
 <p>혼자 만들고 있어 답장이 조금 늦을 수 있습니다. 그래도 모두 읽고 있습니다.</p>
 
 <h2>운영자</h2>
